@@ -1,0 +1,94 @@
+.mainAddTask {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainAddTask form {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 10px;
+    color: #212121;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.inputBox {
+    position: relative;
+}
+
+.inputBox input,
+.inputBox textarea {
+    padding: 20px;
+    outline: none;
+    background: white;
+    border-radius: 5px;
+    color: #212121;
+    border: 1px solid black;
+    resize: none;
+    font-family: 'Open Sans', sans-serif;
+    width: 183px;
+}
+
+.inputBox input:focus,
+.inputBox textarea:focus {
+    border: solid 1px #ffcb88
+}
+
+
+.inputBox span {
+    position: absolute;
+    left: 0;
+    font-size: .8rem;
+    transform: translateX(10px) translateY(-12.5px);
+    padding: 0 6px 1px 5px;
+    border-radius: 2px;
+    background: #ffcb88;
+    letter-spacing: 1px;
+    border: 2px solid #fdfdfd;
+    border-radius: 100vmax;
+    color: #212121;
+}
+
+textarea {
+    height: 150px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+form p {
+    margin-top: -16px;
+    padding-left: 45%;
+    font-size: .8rem;
+}
+
+.addTaskButton {
+    margin-top: -16px;
+    border: none;
+    background-color: #ffcb88;
+    padding: 10px;
+    border-radius: 100vmax;
+    width: 50%;
+    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.addTaskButton:hover {
+    transform: scale(1.1);
+}
+
+@media(min-width: 800px) {
+    .mainAddTask {
+        height: 78vh;
+    }
+
+    .mainAddTask form h3 {
+        font-size: 2rem;
+    }
+}

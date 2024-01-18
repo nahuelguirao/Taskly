@@ -1,0 +1,166 @@
+.mainWaiting {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    place-content: center;
+}
+
+.waitingTaskContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    background-color: #ffd194;
+    width: 70%;
+    max-width: 500px;
+    padding: 10px 16px;
+    border-radius: 16px;
+    margin: 0 auto;
+}
+
+.addNewTaskH2 {
+    font-size: 1.5rem;
+    color: black;
+    font-weight: 300;
+}
+
+.spanOrange {
+    cursor: pointer;
+    margin-left: 6px;
+    color: #ff8a05;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.spanOrange:hover {
+    color: black;
+}
+
+.addNewTaskH4 {
+    padding: 16px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.mainTasks {
+    margin: 50px 0;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+}
+
+.cardContainer {
+    padding: 0 10%;
+    display: grid;
+    align-items: start;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 32px;
+}
+
+.card {
+    background: #fffcf8;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    border-radius: 16px;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid black;
+}
+
+.cardHeader h3 {
+    justify-self: flex-start;
+    margin-left: 16px;
+}
+
+.card .description {
+    margin: 0;
+    text-wrap: pretty;
+    padding: 15px 25px;
+    border-bottom: 1px solid black;
+    font-weight: 500;
+}
+
+.dateContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.dateContainer .editButton {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.editButton:hover {
+    transform: scale(1.2);
+    color: rgb(141, 141, 76);
+}
+
+.card .date {
+    display: inline;
+    margin: 0;
+    font-weight: 300;
+}
+
+.deleteButton {
+    margin-right: 16px;
+    background-color: transparent;
+    position: relative;
+    border: none;
+    cursor: pointer;
+}
+
+.deleteButtonIcon {
+    transform: scale(1.2);
+    transition: .2s linear;
+}
+
+.deleteButton:hover>.deleteButtonIcon {
+    transform: scale(1.5);
+}
+
+.deleteButton:hover>.deleteButtonIcon path {
+    fill: rgb(168, 7, 7);
+}
+
+.deleteButton:hover::after {
+    visibility: visible;
+    opacity: 1;
+    top: -160%;
+}
+
+@media (min-width: 540px) {
+    .cardContainer {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+
+/* WAITING FOR ADD A TASK LOADER */
+.loader {
+    border: 4px solid #ff8a05;
+    border-left-color: transparent;
+    width: 12px;
+    height: 12px;
+    animation: spin 1s linear infinite;
+    border-radius: 50%;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
