@@ -1,5 +1,7 @@
 import { useNavbarToggle } from "../hooks/useNavbarToggle";
 import { MenuIcon } from "../components/UI/MenuIcon";
+import { NavbarDesktop } from "./Navbars/NavbarDesktop";
+import { NavbarMobile } from "./Navbars/NavbarMobile";
 import { Link } from "react-router-dom";
 import "../styles/header.css";
 
@@ -8,28 +10,16 @@ export function Header() {
 
   return (
     <header>
-      <h2 className="h2Header">
-        <span className="importantWord">T</span>askly!
-      </h2>
-      <MenuIcon handleMenuToggle={handleMenuToggle} />
-      {isMenuOpen && (
-        <nav className="navbarMobile">
-          <Link to={"/"} onClick={handleMenuToggle}>
-            My tasks
-          </Link>
-          <Link to={"/addTask"} onClick={handleMenuToggle}>
-            Add Task
-          </Link>
-          <Link to={"/login"} onClick={handleMenuToggle}>
-            Login
-          </Link>
-        </nav>
-      )}
-      <nav className="navbarDesktop">
-        <Link to={"/"}>My tasks</Link>
-        <Link to={"/addTask"}>Add Task</Link>
-        <Link to={"/login"}>Login</Link>
-      </nav>
+      <Link to={"/"}>
+        <h2 className="h2Header">
+          <span className="importantWord">T</span>askly!
+        </h2>
+      </Link>
+      <MenuIcon handleMenuToggle={handleMenuToggle} isMenuOpen={isMenuOpen} />
+      {/* If the device is < 800px */}
+      {isMenuOpen && <NavbarMobile handleMenuToggle={handleMenuToggle} />}
+      {/* If the device is > 800px */}
+      <NavbarDesktop />
     </header>
   );
 }

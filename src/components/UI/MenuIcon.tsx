@@ -1,20 +1,19 @@
+import { IoMenuOutline } from "react-icons/io5";
+import { IoMdClose } from "react-icons/io";
+
 interface MenuIconProps {
   handleMenuToggle: () => void;
+  isMenuOpen: boolean;
 }
 
-export function MenuIcon({ handleMenuToggle }: MenuIconProps) {
+export function MenuIcon({ handleMenuToggle, isMenuOpen }: MenuIconProps) {
   return (
     <>
-      <input className="check-icon" id="check-icon" type="checkbox" />
-      <label
-        className="icon-menu"
-        htmlFor="check-icon"
-        onClick={handleMenuToggle}
-      >
-        <div className="bar bar--1"></div>
-        <div className="bar bar--2"></div>
-        <div className="bar bar--3"></div>
-      </label>
+      {isMenuOpen ? (
+        <IoMdClose onClick={handleMenuToggle} className="menuIcon" />
+      ) : (
+        <IoMenuOutline onClick={handleMenuToggle} className="menuIcon" />
+      )}
     </>
   );
 }

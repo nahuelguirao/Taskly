@@ -15,9 +15,9 @@ export const taskReducer = (state: TaskList, action: ActionStructure) => {
         };
 
         return [...state, newTask];
-      } else {
-        return state;
       }
+
+      return state;
 
     case "DELETE TASK":
       const id = action.payload;
