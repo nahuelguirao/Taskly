@@ -83,6 +83,12 @@ form p {
     transform: scale(1.1);
 }
 
+.errorParagraph {
+    padding: 0;
+    text-align: center;
+    color: red;
+}
+
 @media(min-width: 800px) {
     .mainAddTask {
         height: 78vh;

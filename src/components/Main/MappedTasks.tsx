@@ -1,7 +1,8 @@
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Task } from "../../vite-env";
+import { Task, UUID } from "../../vite-env";
 import { deleteTask } from "../../helpers/deleteTask";
+import { useNavigate } from "react-router-dom";
 
 interface MappedTaskProps {
   navigateToAddTask: () => void;
@@ -14,6 +15,11 @@ export function MappedTasks({
   taskState,
   dispatch,
 }: MappedTaskProps) {
+  const navigate = useNavigate();
+  const handleEdit = (id: UUID | undefined) => {
+    navigate(`/task/${id}`);
+  };
+
   return (
     <main className="mainTasks">
       <h4 className="addNewTaskH4 card">
@@ -39,7 +45,10 @@ export function MappedTasks({
             </p>
             <div className="dateContainer">
               <div>
-                <CiEdit className="editButton" />
+                <CiEdit
+                  className="editButton"
+                  onClick={() => handleEdit(task.id)}
+                />
               </div>
               <p className="date">{task.date}</p>
             </div>

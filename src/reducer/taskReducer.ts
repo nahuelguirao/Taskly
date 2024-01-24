@@ -3,6 +3,7 @@ import { format } from "date-fns";
 
 export const taskReducer = (state: TaskList, action: ActionStructure) => {
   switch (action.type) {
+    // -------
     case "ADD TASK":
       const { title = "", description = "" } = action.payload;
 
@@ -19,11 +20,21 @@ export const taskReducer = (state: TaskList, action: ActionStructure) => {
 
       return state;
 
+    // -------
     case "DELETE TASK":
       const id = action.payload;
       const newState = state.filter((task) => task.id != id);
       return newState;
 
+    // -------
+    case "EDIT TASK":
+      const editedTask = action.payload;
+
+      return state.map((task) =>
+        task.id === editedTask.id ? { ...task, ...editedTask } : task
+      );
+
+    // -------
     default:
       return state;
   }

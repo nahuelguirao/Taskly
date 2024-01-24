@@ -1,18 +1,20 @@
 import { ActionStructure, Task } from "../vite-env";
+import { format } from "date-fns";
 
-export const addTask = (
+export function editTask(
+  filteredTask: Task,
   e: any,
   dispatch: (action: ActionStructure) => void,
-  navigateTo: any,
-  setError: (error: string) => void
-) => {
+  navigate: any,
+  setError: any
+) {
   e.preventDefault();
 
   //Gets the values
   const title = e.target.title.value;
   const description = e.target.description.value;
 
-  //Verifications
+  //Verfications
   if (title.length == 0) {
     setError("Title can't be empty.");
     return;
@@ -23,21 +25,23 @@ export const addTask = (
     return;
   }
 
-  //Creates a new task with the event information (submited)
-  const newTask: Task = {
-    title: title,
-    description: description,
+  //If all is correct creates a Task with the new information
+  const editedTask: Task = {
+    id: filteredTask.id,
+    title,
+    description,
+    date: format(new Date(), "EEEE, MMMM do"),
   };
 
-  //Prepares the action to send it to the reducer
+  //Creates the action 'EDIT TASK'
   const action: ActionStructure = {
-    type: "ADD TASK",
-    payload: newTask,
+    type: "EDIT TASK",
+    payload: editedTask,
   };
 
-  //Executes 'ADD TASK'
+  //Executes edit task in the reducer
   dispatch(action);
 
   //Finally navigates to user's tasks
-  navigateTo("/");
-};
+  navigate("/");
+}

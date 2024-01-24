@@ -1,14 +1,8 @@
-import { useContext } from "react";
-import { TaskStateContext } from "../context/TaskStateContext";
-import { addTask } from "../helpers/addTask";
-import { useNavigate } from "react-router-dom";
+import { useAddTask } from "../hooks/useAddTask";
 import "../styles/addTask.css";
 
 export function AddTask() {
-  const { dispatch } = useContext(TaskStateContext);
-  const navigateTo = useNavigate();
-
-  const handleSubmitAddTask = (e: any) => addTask(e, dispatch, navigateTo);
+  const { error, handleSubmitAddTask } = useAddTask();
 
   return (
     <main className="mainAddTask">
@@ -31,6 +25,7 @@ export function AddTask() {
           * <span>Optional</span>
         </p>
         <button className="addTaskButton">Add task</button>
+        {error && <p className="errorParagraph">{error}</p>}
       </form>
     </main>
   );

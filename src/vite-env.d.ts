@@ -7,7 +7,7 @@ export type MenuToggle = {
 };
 
 //Crypto ID
-type UUID = `${string}-${string}-${string}-${string}`;
+export type UUID = `${string}-${string}-${string}-${string}`;
 
 //Reducer cases
 export type ReducerActions = "ADD TASK" | "DELETE TASK" | "EDIT TASK";

@@ -4,18 +4,23 @@ import { Main } from "./routes/Main";
 import { Login } from "./routes/Login";
 import { AddTask } from "./routes/AddTask";
 import { TaskStateProvider } from "./context/TaskStateContext";
+import { EditTask } from "./routes/EditTask";
+import { FormErrorProvider } from "./context/FormErrorContext";
 
 export function App() {
   return (
     <>
       <TaskStateProvider>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/addTask" element={<AddTask />} />
-          <Route path="/*" element={<Navigate to={"/"} />} />
-        </Routes>
+        <FormErrorProvider>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/addTask" element={<AddTask />} />
+            <Route path="/task/:UUID" element={<EditTask />} />
+            <Route path="/*" element={<Navigate to={"/"} />} />
+          </Routes>
+        </FormErrorProvider>
       </TaskStateProvider>
     </>
   );
