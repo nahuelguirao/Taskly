@@ -17,6 +17,9 @@ export function NavbarMobile({ handleMenuToggle }: NavbarMobileProps) {
         <Link to={"/login"} onClick={handleMenuToggle}>
           Login
         </Link>
+        <Link to={"/singin"} onClick={handleMenuToggle}>
+          Sign in
+        </Link>
       </nav>
     </>
   );

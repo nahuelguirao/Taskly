@@ -2,6 +2,7 @@ import { Header } from "./components/Header";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Main } from "./routes/Main";
 import { Login } from "./routes/Login";
+import { SignIn } from "./routes/SignIn";
 import { AddTask } from "./routes/AddTask";
 import { TaskStateProvider } from "./context/TaskStateContext";
 import { EditTask } from "./routes/EditTask";
@@ -16,6 +17,7 @@ export function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/singin" element={<SignIn />} />
             <Route path="/addTask" element={<AddTask />} />
             <Route path="/task/:UUID" element={<EditTask />} />
             <Route path="/*" element={<Navigate to={"/"} />} />

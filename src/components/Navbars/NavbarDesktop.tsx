@@ -13,6 +13,9 @@ export function NavbarDesktop() {
         <Link className="navLink" to={"/login"}>
           Login
         </Link>
+        <Link className="navLink" to={"/singin"}>
+          Sign in
+        </Link>
       </nav>
     </>
   );

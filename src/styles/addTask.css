@@ -89,6 +89,10 @@ form p {
     color: red;
 }
 
+.loginButton {
+    margin-top: 15px;
+}
+
 @media(min-width: 800px) {
     .mainAddTask {
         height: 78vh;
