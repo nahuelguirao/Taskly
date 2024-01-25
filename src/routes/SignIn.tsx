@@ -1,7 +1,11 @@
+import { useSignIn } from "../hooks/useSignIn";
+
 export function SignIn() {
+  const { signInUser, error } = useSignIn();
+
   return (
     <main className="mainAddTask">
-      <form>
+      <form onSubmit={signInUser}>
         <h3>Sign in</h3>
         <div className="inputBox">
           <input
@@ -10,11 +14,11 @@ export function SignIn() {
             name="username"
             required
           />
-          <span>Email: </span>
+          <span>Username: </span>
         </div>
         <div className="inputBox">
-          <input placeholder="Email..." type="text" name="email" required />
-          <span>Username: </span>
+          <input placeholder="Email..." type="email" name="email" required />
+          <span>Email: </span>
         </div>
         <div className="inputBox">
           <input
@@ -35,6 +39,7 @@ export function SignIn() {
           <span>Repeat password </span>
         </div>
         <button className="addTaskButton loginButton">Sign in</button>
+        {error && <p className="errorParagraph">{error}</p>}
       </form>
     </main>
   );

@@ -3,7 +3,7 @@ import { ActionStructure, Task } from "../vite-env";
 export const addTask = (
   e: any,
   dispatch: (action: ActionStructure) => void,
-  navigateTo: any,
+  navigateTo: (route: string) => void,
   setError: (error: string) => void
 ) => {
   e.preventDefault();
@@ -25,8 +25,8 @@ export const addTask = (
 
   //Creates a new task with the event information (submited)
   const newTask: Task = {
-    title: title,
-    description: description,
+    title,
+    description,
   };
 
   //Prepares the action to send it to the reducer

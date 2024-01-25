@@ -28,3 +28,21 @@ export type Task = {
 
 //Type of an array of Task (without login)
 export type TaskList = Task[];
+
+//Type for a new user
+export type NewUser = {
+  username: string;
+  email: string;
+  password: string;
+};
+
+//User credentials type
+export type UserCredentials = {
+  username: string;
+  password: string;
+};
+
+export type LogedUser = {
+  id: number;
+  username: string;
+};

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { FormErrorContext } from "../context/FormErrorContext";
 import { TaskStateContext } from "../context/TaskStateContext";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,10 @@ export function useAddTask() {
 
   const handleSubmitAddTask = (e: any) =>
     addTask(e, dispatch, navigateTo, setError);
+
+  useEffect(() => {
+    setError("");
+  }, []);
 
   return { error, handleSubmitAddTask };
 }
