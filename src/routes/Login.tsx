@@ -1,14 +1,7 @@
-import { useContext, useEffect } from "react";
 import { useLogin } from "../hooks/useLogIn";
-import { UserContext } from "../context/UserContext";
 
 export function Login() {
   const { handleLoginIn, error } = useLogin();
-
-  const { user } = useContext(UserContext);
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <main className="mainAddTask">

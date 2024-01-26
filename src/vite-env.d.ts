@@ -41,8 +41,3 @@ export type UserCredentials = {
   username: string;
   password: string;
 };
-
-export type LogedUser = {
-  id: number;
-  username: string;
-};

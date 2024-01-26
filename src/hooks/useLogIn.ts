@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FormErrorContext } from "../context/FormErrorContext";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,11 @@ export function useLogin() {
   //Gets the context errors
   const { error, setError } = useContext(FormErrorContext);
   const { setUser } = useContext(UserContext);
+
+  //Resets the global form-error once each time the user enters in 'edit task'
+  useEffect(() => {
+    setError("");
+  }, []);
 
   //To navigate
   const navigateTo = useNavigate();
@@ -26,6 +31,7 @@ export function useLogin() {
     setUser({
       id: userData.id,
       username: userData.username,
+      token: userData.token,
     });
   };
 

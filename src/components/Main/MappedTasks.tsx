@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Task, UUID } from "../../vite-env";
 import { deleteTask } from "../../helpers/deleteTask";
-import { useNavigate } from "react-router-dom";
 
 interface MappedTaskProps {
   navigateToAddTask: () => void;
@@ -19,6 +21,8 @@ export function MappedTasks({
   const handleEdit = (id: UUID | undefined) => {
     navigate(`/task/${id}`);
   };
+
+  const { user, welcomeMessage } = useContext(UserContext);
 
   return (
     <main className="mainTasks">
@@ -55,6 +59,17 @@ export function MappedTasks({
           </div>
         ))}
       </section>
+
+      {welcomeMessage && (
+        <div className="logoutMessage">
+          <p>
+            Welcome{" "}
+            {user && (
+              <span className="welcomeMessageSpan">{user.username}!</span>
+            )}
+          </p>
+        </div>
+      )}
     </main>
   );
 }

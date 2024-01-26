@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { FormErrorContext } from "../context/FormErrorContext";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +10,14 @@ export function useSignIn() {
   const { error, setError } = useContext(FormErrorContext);
   const { setUser } = useContext(UserContext);
 
+  //Resets the global form-error once each time the user enters in 'edit task'
+  useEffect(() => {
+    setError("");
+  }, []);
+
   //TO navigate
   const navigateTo = useNavigate();
 
-  //
   const signInUser = async (e: any) => {
     e.preventDefault();
 
@@ -45,10 +49,11 @@ export function useSignIn() {
     const newUser: NewUser = { username, password: password1, email };
     const userData = await fetchSignIn(setError, newUser, navigateTo);
 
-    //Sets user's info in the usercontext
+    // Sets user's info in the usercontext
     setUser({
       id: userData.id,
       username: userData.username,
+      token: userData.token,
     });
   };
 

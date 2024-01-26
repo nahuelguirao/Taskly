@@ -26,6 +26,7 @@ export async function fetchSignIn(
 
     //Returns the data to set usercontext user's info
     const responseData = await response.json();
+
     return responseData.user;
   } catch (error) {
     console.error(error);
