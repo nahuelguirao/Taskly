@@ -34,12 +34,14 @@ export function MappedTasks({
       </h4>
       <section className="cardContainer">
         {taskState.map((task: Task) => (
-          <div className="card" key={task.id}>
+          <div className="card" key={task.uuid}>
             <div className="cardHeader">
               <h3>{task.title}</h3>
               <RiDeleteBin6Line
                 className="deleteButton"
-                onClick={() => task.id && deleteTask(task.id, dispatch)}
+                onClick={() =>
+                  task.uuid && deleteTask(task.uuid, dispatch, user)
+                }
               />
             </div>
             <p className="description">
@@ -51,7 +53,7 @@ export function MappedTasks({
               <div>
                 <CiEdit
                   className="editButton"
-                  onClick={() => handleEdit(task.id)}
+                  onClick={() => handleEdit(task.uuid)}
                 />
               </div>
               <p className="date">{task.date}</p>

@@ -7,7 +7,6 @@ import "../styles/main.css";
 
 export function Main() {
   const { taskState, dispatch } = useContext(TaskStateContext);
-
   const navigate = useNavigate();
 
   const navigateToAddTask = () => {

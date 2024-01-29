@@ -10,7 +10,12 @@ export type MenuToggle = {
 export type UUID = `${string}-${string}-${string}-${string}`;
 
 //Reducer cases
-export type ReducerActions = "ADD TASK" | "DELETE TASK" | "EDIT TASK";
+export type ReducerActions =
+  | "ADD TASK"
+  | "DELETE TASK"
+  | "EDIT TASK"
+  | "FETCH TASKS"
+  | "LOGOUT";
 
 //Type of the action sent to the reducer
 export type ActionStructure = {
@@ -20,7 +25,7 @@ export type ActionStructure = {
 
 //Type of task without login
 export type Task = {
-  id?: UUID;
+  uuid?: UUID;
   title: string;
   description: string;
   date?: string;
