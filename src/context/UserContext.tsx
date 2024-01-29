@@ -1,9 +1,31 @@
-import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useEffect,
+  useState,
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+} from "react";
+import { User } from "../types/generalTypes";
 
-export const UserContext = createContext<any>(undefined);
+// USER'S CONTEXT
+interface UserContextProps {
+  user: User | undefined;
+  setUser: Dispatch<SetStateAction<User | undefined>>;
+  welcomeMessage: boolean;
+}
 
-export const UserContextProvider = ({ children }: any) => {
-  const [user, setUser] = useState(undefined);
+export const UserContext = createContext<UserContextProps | undefined>(
+  undefined
+);
+
+// USER'S CONTEXT PROVIDER
+interface UserContextProviderProps {
+  children: ReactNode;
+}
+
+export const UserContextProvider = ({ children }: UserContextProviderProps) => {
+  const [user, setUser] = useState<undefined | User>(undefined);
   const [welcomeMessage, setWelcomeMessage] = useState(false);
 
   useEffect(() => {

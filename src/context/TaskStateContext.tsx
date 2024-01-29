@@ -1,12 +1,36 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  Dispatch,
+} from "react";
+import { useFetchUsersTasks } from "../hooks/useFetchUsersTasks";
 import { taskReducer } from "../reducer/taskReducer";
 import { UserContext } from "./UserContext";
+import { Task } from "../types/generalTypes";
+import { ActionStructure } from "../vite-env";
 
-//USER'S TASK CONTEXT
-export const TaskStateContext = createContext<any>([]);
+//USER'S TASKS CONTEXT
+interface TaskStateContextProps {
+  taskState: Task[];
+  dispatch: Dispatch<ActionStructure>;
+}
 
-export const TaskStateProvider = ({ children }: any) => {
-  const { user } = useContext(UserContext);
+export const TaskStateContext = createContext<TaskStateContextProps | null>(
+  null
+);
+
+//USER'S TASKS PROVIDER
+interface TaskStateProviderProps {
+  children: ReactNode;
+}
+
+export const TaskStateProvider = ({ children }: TaskStateProviderProps) => {
+  //Gets the user
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
 
   //Tries to get saved tasks
   const storedTask = localStorage.getItem("tasks");
@@ -17,22 +41,9 @@ export const TaskStateProvider = ({ children }: any) => {
   //Taskstate managed by the useReducer
   const [taskState, dispatch] = useReducer(taskReducer, initialState);
 
+  //Fetch tasks if user is loged in
   useEffect(() => {
-    const fetchUserTasks = async () => {
-      try {
-        if (user !== undefined) {
-          localStorage.removeItem("tasks");
-          const response = await fetch(
-            `http://127.0.0.1:8000/get_tasks/user/${user.id}/`
-          );
-          const result = await response.json();
-          dispatch({ type: "FETCH TASKS", payload: result });
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUserTasks();
+    useFetchUsersTasks(user, dispatch);
   }, [user]);
 
   //Sets the taskState in the local storage
