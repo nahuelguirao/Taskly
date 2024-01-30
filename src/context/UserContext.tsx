@@ -12,7 +12,6 @@ import { User } from "../types/generalTypes";
 interface UserContextProps {
   user: User | undefined;
   setUser: Dispatch<SetStateAction<User | undefined>>;
-  welcomeMessage: boolean;
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(
@@ -26,7 +25,6 @@ interface UserContextProviderProps {
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [user, setUser] = useState<undefined | User>(undefined);
-  const [welcomeMessage, setWelcomeMessage] = useState(false);
 
   useEffect(() => {
     // Tries to get a user in the local storage
@@ -42,17 +40,11 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   useEffect(() => {
     if (user !== undefined) {
       localStorage.setItem("user", JSON.stringify(user));
-      //Welcome message interval
-      setWelcomeMessage(true);
-
-      setTimeout(() => {
-        setWelcomeMessage(false);
-      }, 5000);
     }
   }, [user]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, welcomeMessage }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,31 +1,31 @@
-import { useContext, useEffect } from "react";
+import { FormEvent, useContext } from "react";
 import { TaskStateContext } from "../context/TaskStateContext";
-import { FormErrorContext } from "../context/FormErrorContext";
 import { UserContext } from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
 import { editTask } from "../helpers/editTask";
-import { Task } from "../vite-env";
+import { Task, UUID } from "../types/generalTypes";
+import { UtilitiesContext } from "../context/UtilitiesContext";
 
-export function useEditTask(uuid: any) {
-  //Contexts
+export function useEditTask(uuid: UUID) {
+  //Tasks state
   const { taskState, dispatch } = useContext(TaskStateContext);
-  const { error, setError } = useContext(FormErrorContext);
-  const { user } = useContext(UserContext);
+
+  //User info
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
 
   //Gets the filtered task from the taskState context
   const filteredTask = taskState.find((task: Task) => task.uuid == uuid);
 
-  //To navigate
-  const navigate = useNavigate();
+  if (!filteredTask) {
+    return undefined;
+  }
 
-  //Function to handle submit after editing
-  const handleEditTask = (e: any) =>
-    editTask(filteredTask, e, dispatch, navigate, setError, user);
+  //To navigator
+  const { navigateTo } = useContext(UtilitiesContext);
 
-  //Resets the global form-error once each time the user enters in 'edit task'
-  useEffect(() => {
-    setError("");
-  }, []);
+  //Executes 'edit task' when it's called
+  const handleEditTask = (e: FormEvent<HTMLFormElement>) =>
+    editTask(filteredTask, e, dispatch, navigateTo, user);
 
-  return { error, filteredTask, handleEditTask };
+  return { filteredTask, handleEditTask };
 }

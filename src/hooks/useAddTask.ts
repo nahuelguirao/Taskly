@@ -1,22 +1,23 @@
-import { useContext, useEffect } from "react";
-import { FormErrorContext } from "../context/FormErrorContext";
+import { FormEvent, useContext } from "react";
 import { TaskStateContext } from "../context/TaskStateContext";
 import { UserContext } from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
 import { addTask } from "../helpers/addTask";
+import { UtilitiesContext } from "../context/UtilitiesContext";
 
 export function useAddTask() {
+  //Gets dispatch to update task's state
   const { dispatch } = useContext(TaskStateContext);
-  const { user } = useContext(UserContext);
-  const { error, setError } = useContext(FormErrorContext);
-  const navigateTo = useNavigate();
 
-  const handleSubmitAddTask = (e: any) =>
-    addTask(e, dispatch, navigateTo, setError, user);
+  //User info
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
 
-  useEffect(() => {
-    setError("");
-  }, []);
+  //Navigator
+  const { navigateTo } = useContext(UtilitiesContext);
 
-  return { error, handleSubmitAddTask };
+  //Executes (when it's used) addTask
+  const handleSubmitAddTask = (e: FormEvent<HTMLFormElement>) =>
+    addTask(e, dispatch, navigateTo, user);
+
+  return { handleSubmitAddTask };
 }

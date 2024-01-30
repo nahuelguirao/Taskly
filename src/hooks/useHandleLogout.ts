@@ -1,24 +1,41 @@
-import { useContext } from "react";
+import { Dispatch, useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import toast from "react-hot-toast";
+import { UtilitiesContext } from "../context/UtilitiesContext";
+import { ActionStructure } from "../types/generalTypes";
 
-export function useHandleLogout() {
-  const { user, setUser } = useContext(UserContext);
+export function useHandleLogout(dispatch: Dispatch<ActionStructure>) {
+  //Gest users info and setUser
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
+  const setUser = userContext?.setUser;
 
-  const handleLogout = () => {
+  //Navigator
+  const { navigateTo } = useContext(UtilitiesContext);
+
+  const handleLogout = async () => {
     try {
       const LOGOUT_URL = "http://127.0.0.1:8000/logout/";
-      fetch(LOGOUT_URL, {
+
+      await fetch(LOGOUT_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ token: user.token }),
+        body: JSON.stringify({ token: user?.token }),
       });
     } catch (error) {
       console.error(error);
     }
 
-    setUser(undefined);
+    //Finally, update user's context = undefined, remove user's info  from local storage, removes tasks with dispatch + toast + navigates to main
+    if (setUser) {
+      setUser(undefined);
+      localStorage.removeItem("user");
+      dispatch({ type: "LOGOUT" });
+      navigateTo("/");
+      toast("Goodbye!", { icon: "👋" });
+    }
   };
 
   return { user, handleLogout };

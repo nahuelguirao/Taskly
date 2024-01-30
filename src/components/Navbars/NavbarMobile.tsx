@@ -1,24 +1,18 @@
-import { useContext, useState } from "react";
-import { useHandleLogout } from "../../hooks/useHandleLogout";
-import { handleLogoutNotification } from "../../helpers/handleLogoutNotification";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
 import { TaskStateContext } from "../../context/TaskStateContext";
+import { useHandleLogout } from "../../hooks/useHandleLogout";
+import { Link } from "react-router-dom";
 
 interface NavbarMobileProps {
   handleMenuToggle: () => void;
 }
 
 export function NavbarMobile({ handleMenuToggle }: NavbarMobileProps) {
-  const { user, handleLogout } = useHandleLogout();
+  //Gets dispatch to realise 'LOGOUT' action
   const { dispatch } = useContext(TaskStateContext);
-  const [showLogoutMessage, setShowLogoutMessage] = useState(false);
 
-  const handleLogoutClick = () => {
-    handleLogoutNotification(handleLogout, setShowLogoutMessage);
-    localStorage.removeItem("user");
-    dispatch({ type: "LOGOUT" });
-  };
-
+  //Gets user information + function to logout
+  const { user, handleLogout } = useHandleLogout(dispatch);
   return (
     <>
       <nav className="navbarMobile">
@@ -29,7 +23,7 @@ export function NavbarMobile({ handleMenuToggle }: NavbarMobileProps) {
           Add Task
         </Link>
         {user !== undefined ? (
-          <a className="navLink" onClick={handleLogoutClick}>
+          <a className="navLink" onClick={handleLogout}>
             Logout
           </a>
         ) : (
@@ -43,12 +37,6 @@ export function NavbarMobile({ handleMenuToggle }: NavbarMobileProps) {
           </>
         )}
       </nav>
-
-      {showLogoutMessage && (
-        <div className="logoutMessage">
-          <p>Logged out!</p>
-        </div>
-      )}
     </>
   );
 }

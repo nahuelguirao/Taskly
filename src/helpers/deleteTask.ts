@@ -1,22 +1,29 @@
-import { ActionStructure, UUID } from "../vite-env";
+import toast from "react-hot-toast";
+import { ActionStructure, UUID, User } from "../types/generalTypes";
+import { Dispatch } from "react";
 
 export async function deleteTask(
   uuid: UUID,
-  dispatch: (action: ActionStructure) => void,
-  user: any
+  dispatch: Dispatch<ActionStructure>,
+  user: User | undefined
 ) {
+  //Sets action 'DELETE TASK'
   const action: ActionStructure = {
     type: "DELETE TASK",
     payload: uuid,
   };
 
+  //Try to delete task
   if (user == undefined) {
     dispatch(action);
+    toast.success("Task deleted!");
   } else {
     try {
       fetch(`http://127.0.0.1:8000/delete_task/${uuid}/`, {
         method: "DELETE",
       });
+
+      toast.success("Task deleted!");
       dispatch(action);
     } catch (error) {
       console.error(error);

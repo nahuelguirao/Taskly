@@ -1,25 +1,24 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { TaskStateContext } from "../context/TaskStateContext";
 import { WaitingForTask } from "../components/Main/WaitingForTask";
 import { MappedTasks } from "../components/Main/MappedTasks";
+import { UtilitiesContext } from "../context/UtilitiesContext";
 import "../styles/main.css";
 
 export function Main() {
+  //Gets tasks state
   const { taskState, dispatch } = useContext(TaskStateContext);
-  const navigate = useNavigate();
-
-  const navigateToAddTask = () => {
-    navigate("/addTask");
-  };
+  //Navigator
+  const utilitiesContext = useContext(UtilitiesContext);
+  const navigateTo = utilitiesContext?.navigateTo;
 
   return (
     <>
-      {taskState.length == 0 ? (
-        <WaitingForTask navigateToAddTask={navigateToAddTask} />
+      {taskState.length === 0 ? (
+        <WaitingForTask navigateTo={navigateTo} />
       ) : (
         <MappedTasks
-          navigateToAddTask={navigateToAddTask}
+          navigateTo={navigateTo}
           taskState={taskState}
           dispatch={dispatch}
         />

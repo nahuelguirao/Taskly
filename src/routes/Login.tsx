@@ -1,7 +1,7 @@
 import { useLogin } from "../hooks/useLogIn";
 
 export function Login() {
-  const { handleLoginIn, error } = useLogin();
+  const { handleLoginIn } = useLogin();
 
   return (
     <main className="mainAddTask">
@@ -26,7 +26,6 @@ export function Login() {
           <span>Password </span>
         </div>
         <button className="addTaskButton loginButton">Login</button>
-        {error && <p className="errorParagraph">{error}</p>}
       </form>
     </main>
   );

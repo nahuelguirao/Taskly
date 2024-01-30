@@ -9,8 +9,7 @@ import {
 import { useFetchUsersTasks } from "../hooks/useFetchUsersTasks";
 import { taskReducer } from "../reducer/taskReducer";
 import { UserContext } from "./UserContext";
-import { Task } from "../types/generalTypes";
-import { ActionStructure } from "../vite-env";
+import { Task, ActionStructure } from "../types/generalTypes";
 
 //USER'S TASKS CONTEXT
 interface TaskStateContextProps {
@@ -18,9 +17,10 @@ interface TaskStateContextProps {
   dispatch: Dispatch<ActionStructure>;
 }
 
-export const TaskStateContext = createContext<TaskStateContextProps | null>(
-  null
-);
+export const TaskStateContext = createContext<TaskStateContextProps>({
+  taskState: [],
+  dispatch: () => {},
+});
 
 //USER'S TASKS PROVIDER
 interface TaskStateProviderProps {
@@ -43,12 +43,14 @@ export const TaskStateProvider = ({ children }: TaskStateProviderProps) => {
 
   //Fetch tasks if user is loged in
   useEffect(() => {
-    useFetchUsersTasks(user, dispatch);
+    if (user !== undefined) {
+      useFetchUsersTasks(user, dispatch);
+    }
   }, [user]);
 
   //Sets the taskState in the local storage
   useEffect(() => {
-    if (user == undefined) {
+    if (user === undefined) {
       localStorage.setItem("tasks", JSON.stringify(taskState));
     }
   }, [taskState]);

@@ -1,9 +1,9 @@
-import { UserCredentials } from "../vite-env";
+import { User } from "../types/generalTypes";
+import toast from "react-hot-toast";
 
 export async function fetchLogin(
-  userCredentials: UserCredentials,
-  navigateTo: (route: string) => void,
-  setError: (error: string) => void
+  userCredentials: User,
+  navigateTo: (route: string) => void
 ) {
   try {
     const LOGIN_URL = "http://127.0.0.1:8000/login/";
@@ -16,11 +16,12 @@ export async function fetchLogin(
     });
 
     if (!response.ok) {
-      setError("Invalid credentials.");
+      toast.error("Invalid credentials.", { position: "bottom-center" });
       return;
     }
 
     navigateTo("/");
+    toast.success(`Welcome ${userCredentials.username}!`, { icon: "👋" });
 
     const responseData = await response.json();
     return responseData.user;

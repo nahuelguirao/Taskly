@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import { MenuToggle } from "../vite-env";
+import { MenuToggle } from "../types/generalTypes";
 
 export function useNavbarToggle(): MenuToggle {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   //Control close/open mobile menu
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  //Close the menu
+  const forcesCloseMenu = () => {
+    setIsMenuOpen(false);
   };
 
   //Checks if the window width is more than 800px at the first time the site is loaded
@@ -16,5 +21,5 @@ export function useNavbarToggle(): MenuToggle {
     }
   }, []);
 
-  return { isMenuOpen, handleMenuToggle };
+  return { isMenuOpen, handleMenuToggle, forcesCloseMenu };
 }

@@ -1,27 +1,28 @@
-import { ActionStructure, Task } from "../vite-env";
+import toast from "react-hot-toast";
 import { format } from "date-fns";
+import { ActionStructure, Task, User } from "../types/generalTypes";
+import { Dispatch, FormEvent } from "react";
 
 export const addTask = async (
-  e: any,
-  dispatch: (action: ActionStructure) => void,
+  e: FormEvent<HTMLFormElement>,
+  dispatch: Dispatch<ActionStructure>,
   navigateTo: (route: string) => void,
-  setError: (error: string) => void,
-  user: any
+  user: User | undefined
 ) => {
   e.preventDefault();
 
   //Gets the values
-  const title = e.target.title.value;
-  const description = e.target.description.value;
+  const title = e.currentTarget.title.value;
+  const description = e.currentTarget.description.value;
 
   //Verifications
   if (title.length == 0) {
-    setError("Title can't be empty.");
+    toast.error("Title can't be empty");
     return;
   }
 
   if (title.length > 50) {
-    setError("Title length must be less than 50 characters.");
+    toast.error("Title length must be less than 50 characters.");
     return;
   }
 
@@ -41,8 +42,8 @@ export const addTask = async (
 
   //Executes 'ADD TASK'
   if (user == undefined) {
-    console.log("paso");
     dispatch(action);
+    toast.success("Task added!");
   } else {
     try {
       const response = await fetch("http://127.0.0.1:8000/tasks/", {
@@ -63,6 +64,7 @@ export const addTask = async (
         console.error("Failed to add task:", response.statusText);
       }
 
+      toast.success("Task added!");
       dispatch(action);
     } catch (error) {
       console.error(error);

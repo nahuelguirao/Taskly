@@ -1,28 +1,29 @@
-import { ActionStructure, Task } from "../vite-env";
+import toast from "react-hot-toast";
 import { format } from "date-fns";
+import { ActionStructure, Task, User } from "../types/generalTypes";
+import { Dispatch } from "react";
 
 export async function editTask(
   filteredTask: Task,
   e: any,
-  dispatch: (action: ActionStructure) => void,
-  navigate: any,
-  setError: (error: string) => void,
-  user: any
+  dispatch: Dispatch<ActionStructure>,
+  navigate: (route: string) => void,
+  user: User | undefined
 ) {
   e.preventDefault();
 
   //Gets the values
-  const title = e.target.title.value;
-  const description = e.target.description.value;
+  const title = e.currentTarget.title.value;
+  const description = e.currentTarget.description.value;
 
   //Verfications
   if (title.length == 0) {
-    setError("Title can't be empty.");
+    toast.error("Title can't be empty");
     return;
   }
 
   if (title.length > 50) {
-    setError("Title length must be less than 50 characters.");
+    toast.error("Title length must be less than 50 characters.");
     return;
   }
 
@@ -41,6 +42,7 @@ export async function editTask(
   };
 
   if (user == undefined) {
+    toast.success("Task edited!");
     //Executes edit task in the reducer
     dispatch(action);
   } else {
@@ -61,6 +63,7 @@ export async function editTask(
     );
 
     if (response.ok) {
+      toast.success("Task edited!");
       dispatch(action);
     } else {
       console.error(

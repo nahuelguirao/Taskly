@@ -50,51 +50,7 @@ header a {
     display: none;
 }
 
-.logoutMessage {
-    position: absolute;
-    z-index: 100;
-    top: 100px;
-    right: 20px;
-    border-radius: 100vmax;
-    padding: 5px 15px;
-    background-color: #FFD194;
-    color: #FF8800;
-    border: 1px solid white;
-    animation: alertAnimation 500ms, fadeOut 500ms forwards 4000ms;
-}
 
-.welcomeMessageSpan {
-    color: white;
-    font-weight: 800;
-}
-
-.logoutMessage p {
-    margin: 0;
-}
-
-@keyframes alertAnimation {
-    from {
-        opacity: 0;
-        transform: scale(0);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: scale(1.2)
-    }
-
-    to {
-        opacity: 0;
-        transform: scale(0)
-    }
-}
 
 @media(min-width: 800px) {
     .navbarMobile {

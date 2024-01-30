@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "../styles/header.css";
 
 export function Header() {
+  //Menu controls and state
   const { isMenuOpen, handleMenuToggle } = useNavbarToggle();
 
   return (
@@ -16,8 +17,10 @@ export function Header() {
         </h2>
       </Link>
       <MenuIcon handleMenuToggle={handleMenuToggle} isMenuOpen={isMenuOpen} />
+
       {/* If the device is < 800px */}
       {isMenuOpen && <NavbarMobile handleMenuToggle={handleMenuToggle} />}
+
       {/* If the device is > 800px */}
       <NavbarDesktop />
     </header>

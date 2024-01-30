@@ -1,6 +1,6 @@
-import { ActionStructure, TaskList } from "../vite-env";
+import { ActionStructure, Task } from "../types/generalTypes";
 
-export const taskReducer = (state: TaskList, action: ActionStructure) => {
+export const taskReducer = (state: Task[], action: ActionStructure) => {
   switch (action.type) {
     // -------
     case "ADD TASK":

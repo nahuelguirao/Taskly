@@ -1,7 +1,7 @@
 import { useSignIn } from "../hooks/useSignIn";
 
 export function SignIn() {
-  const { signInUser, error } = useSignIn();
+  const { signInUser } = useSignIn();
 
   return (
     <main className="mainAddTask">
@@ -39,7 +39,6 @@ export function SignIn() {
           <span>Repeat password </span>
         </div>
         <button className="addTaskButton loginButton">Sign in</button>
-        {error && <p className="errorParagraph">{error}</p>}
       </form>
     </main>
   );

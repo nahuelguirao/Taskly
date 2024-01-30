@@ -1,8 +1,7 @@
-import { NewUser } from "../vite-env";
+import { User } from "../types/generalTypes";
 
 export async function fetchSignIn(
-  setError: any,
-  newUser: NewUser,
+  newUser: User,
   navigateTo: (route: string) => void
 ) {
   const URL_SIGNIN = "http://127.0.0.1:8000/signin/";
@@ -17,7 +16,6 @@ export async function fetchSignIn(
     });
 
     if (!response.ok) {
-      setError("Username or email already exists!");
       throw new Error("Error creating the user.");
     }
 

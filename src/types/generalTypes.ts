@@ -1,6 +1,6 @@
-type UUID = `${string}-${string}-${string}-${string}`;
+export type UUID = `${string}-${string}-${string}-${string}`;
 
-type ActionType =
+export type ActionType =
   | "ADD TASK"
   | "DELETE TASK"
   | "EDIT TASK"
@@ -22,5 +22,11 @@ export type User = {
 
 export type ActionStructure = {
   type: ActionType;
-  payload: any;
+  payload?: any;
+};
+
+export type MenuToggle = {
+  isMenuOpen: boolean;
+  handleMenuToggle: () => void;
+  forcesCloseMenu: () => void;
 };

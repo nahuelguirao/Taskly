@@ -1,34 +1,30 @@
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { Dispatch, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
+import { deleteTask } from "../../helpers/deleteTask";
+import { ActionStructure, Task } from "../../types/generalTypes";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Task, UUID } from "../../vite-env";
-import { deleteTask } from "../../helpers/deleteTask";
 
 interface MappedTaskProps {
-  navigateToAddTask: () => void;
+  navigateTo: (route: string) => void;
   taskState: Task[];
-  dispatch: () => void;
+  dispatch: Dispatch<ActionStructure>;
 }
 
 export function MappedTasks({
-  navigateToAddTask,
+  navigateTo,
   taskState,
   dispatch,
 }: MappedTaskProps) {
-  const navigate = useNavigate();
-  const handleEdit = (id: UUID | undefined) => {
-    navigate(`/task/${id}`);
-  };
-
-  const { user, welcomeMessage } = useContext(UserContext);
+  //Gets user data
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
 
   return (
     <main className="mainTasks">
       <h4 className="addNewTaskH4 card">
         Add a new task by clicking
-        <span className="spanOrange" onClick={navigateToAddTask}>
+        <span className="spanOrange" onClick={() => navigateTo("/addTask")}>
           HERE!
         </span>
       </h4>
@@ -53,7 +49,7 @@ export function MappedTasks({
               <div>
                 <CiEdit
                   className="editButton"
-                  onClick={() => handleEdit(task.uuid)}
+                  onClick={() => navigateTo(`/task/${task.uuid}`)}
                 />
               </div>
               <p className="date">{task.date}</p>
@@ -61,17 +57,6 @@ export function MappedTasks({
           </div>
         ))}
       </section>
-
-      {welcomeMessage && (
-        <div className="logoutMessage">
-          <p>
-            Welcome{" "}
-            {user && (
-              <span className="welcomeMessageSpan">{user.username}!</span>
-            )}
-          </p>
-        </div>
-      )}
     </main>
   );
 }

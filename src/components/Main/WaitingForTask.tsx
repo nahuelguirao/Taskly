@@ -2,34 +2,25 @@ import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 
 interface WaitingForTaskProps {
-  navigateToAddTask: () => void;
+  navigateTo: (route: string) => void;
 }
 
-export function WaitingForTask({ navigateToAddTask }: WaitingForTaskProps) {
-  const { user, welcomeMessage } = useContext(UserContext);
+export function WaitingForTask({ navigateTo }: WaitingForTaskProps) {
+  //Gets the user data
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
 
   return (
     <main className="mainWaiting">
       <div className="waitingTaskContainer card">
         <h2 className="addNewTaskH2">
           {user && `Hi ${user.username}!`} Add a new
-          <span className="spanOrange" onClick={navigateToAddTask}>
+          <span className="spanOrange" onClick={() => navigateTo("/addTask")}>
             task
           </span>
         </h2>
         <div className="loader"></div>
       </div>
-
-      {welcomeMessage && (
-        <div className="logoutMessage">
-          <p>
-            Welcome{" "}
-            {user && (
-              <span className="welcomeMessageSpan">{user.username}!</span>
-            )}
-          </p>
-        </div>
-      )}
     </main>
   );
 }

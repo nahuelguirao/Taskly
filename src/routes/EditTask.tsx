@@ -5,7 +5,7 @@ export function EditTask() {
   //Gets the Task's UUID from the URL
   const { UUID } = useParams();
 
-  const { error, filteredTask, handleEditTask } = useEditTask(UUID);
+  const { filteredTask, handleEditTask } = useEditTask(UUID);
 
   return (
     <main className="mainAddTask">
@@ -16,7 +16,7 @@ export function EditTask() {
             placeholder="Do homework, study..."
             type="text"
             name="title"
-            defaultValue={filteredTask.title}
+            defaultValue={filteredTask && filteredTask.title}
             required
           />
           <span>Task's title </span>
@@ -25,7 +25,11 @@ export function EditTask() {
           <textarea
             placeholder="Do homework, study..."
             name="description"
-            defaultValue={filteredTask.description && filteredTask.description}
+            defaultValue={
+              filteredTask &&
+              filteredTask.description &&
+              filteredTask.description
+            }
           />
           <span>Task's description * </span>
         </div>
@@ -33,7 +37,6 @@ export function EditTask() {
           * <span>Optional</span>
         </p>
         <button className="addTaskButton">Edit Task</button>
-        {error && <p className="errorParagraph">{error}</p>}
       </form>
     </main>
   );

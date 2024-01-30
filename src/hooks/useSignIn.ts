@@ -1,19 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { FormErrorContext } from "../context/FormErrorContext";
 import { useNavigate } from "react-router-dom";
-import { NewUser } from "../vite-env";
 import { fetchSignIn } from "../helpers/fetchSignIn";
+import toast from "react-hot-toast";
 
 export function useSignIn() {
   //Gets the context's error
-  const { error, setError } = useContext(FormErrorContext);
   const { setUser } = useContext(UserContext);
-
-  //Resets the global form-error once each time the user enters in 'edit task'
-  useEffect(() => {
-    setError("");
-  }, []);
 
   //TO navigate
   const navigateTo = useNavigate();
@@ -29,17 +22,22 @@ export function useSignIn() {
 
     // VALIDATIONS
     if (password1 != password2) {
-      setError("Passwords are not the same.");
+      toast.error("Passwords are not the same.");
+      return;
+    }
+
+    if (username.length == 0 || email.length == 0) {
+      toast.error("Username and email must be completed!");
       return;
     }
 
     if (password1.length < 8) {
-      setError("Password's length must be greather than 8 characters.");
+      toast.error("Password's length must be greather than 8 characters.");
       return;
     }
 
     if (username.length > 255 || email.length > 255) {
-      setError(
+      toast.error(
         "Username and email length must be lower than 255 characters length."
       );
       return;
@@ -47,7 +45,7 @@ export function useSignIn() {
 
     //If passes the validation creates the user and fetch into the API
     const newUser: NewUser = { username, password: password1, email };
-    const userData = await fetchSignIn(setError, newUser, navigateTo);
+    const userData = await fetchSignIn(newUser, navigateTo);
 
     // Sets user's info in the usercontext
     setUser({
@@ -57,5 +55,5 @@ export function useSignIn() {
     });
   };
 
-  return { error, signInUser };
+  return { signInUser };
 }

@@ -2,11 +2,11 @@ import { useAddTask } from "../hooks/useAddTask";
 import "../styles/addTask.css";
 
 export function AddTask() {
-  const { error, handleSubmitAddTask } = useAddTask();
+  const { handleSubmitAddTask } = useAddTask();
 
   return (
     <main className="mainAddTask">
-      <form onSubmit={handleSubmitAddTask}>
+      <form onSubmit={handleSubmitAddTask} method="POST">
         <h3>Add a new task!</h3>
         <div className="inputBox">
           <input
@@ -25,7 +25,6 @@ export function AddTask() {
           * <span>Optional</span>
         </p>
         <button className="addTaskButton">Add task</button>
-        {error && <p className="errorParagraph">{error}</p>}
       </form>
     </main>
   );
