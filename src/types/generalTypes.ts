@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type UUID = `${string}-${string}-${string}-${string}`;
 
 export type ActionType =
@@ -28,5 +30,5 @@ export type ActionStructure = {
 export type MenuToggle = {
   isMenuOpen: boolean;
   handleMenuToggle: () => void;
-  forcesCloseMenu: () => void;
+  setIsMenuOpen: Dispatch<SetStateAction<boolean>>;
 };

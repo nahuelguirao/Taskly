@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 export function useSignIn() {
   //Gets the context's error
-  const { setUser } = useContext(UserContext);
+  const { setUser }: any = useContext(UserContext);
 
   //TO navigate
   const navigateTo = useNavigate();
@@ -44,7 +44,7 @@ export function useSignIn() {
     }
 
     //If passes the validation creates the user and fetch into the API
-    const newUser: NewUser = { username, password: password1, email };
+    const newUser = { username, password: password1, email };
     const userData = await fetchSignIn(newUser, navigateTo);
 
     // Sets user's info in the usercontext
@@ -53,6 +53,8 @@ export function useSignIn() {
       username: userData.username,
       token: userData.token,
     });
+
+    toast(`Welcome ${userData.username}!`, { icon: "👋" });
   };
 
   return { signInUser };

@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 
 export function EditTask() {
   //Gets the Task's UUID from the URL
-  const { UUID } = useParams();
+  let { UUID } = useParams();
 
-  const { filteredTask, handleEditTask } = useEditTask(UUID);
+  const { filteredTask, handleEditTask }: any = useEditTask(UUID);
 
   return (
     <main className="mainAddTask">

@@ -19,7 +19,7 @@ export async function deleteTask(
     toast.success("Task deleted!");
   } else {
     try {
-      fetch(`http://127.0.0.1:8000/delete_task/${uuid}/`, {
+      fetch(`https://api-taskly-l1d9.onrender.com/delete_task/${uuid}/`, {
         method: "DELETE",
       });
 

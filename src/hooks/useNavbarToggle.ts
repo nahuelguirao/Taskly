@@ -9,11 +9,6 @@ export function useNavbarToggle(): MenuToggle {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  //Close the menu
-  const forcesCloseMenu = () => {
-    setIsMenuOpen(false);
-  };
-
   //Checks if the window width is more than 800px at the first time the site is loaded
   useEffect(() => {
     if (window.innerWidth > 800) {
@@ -21,5 +16,5 @@ export function useNavbarToggle(): MenuToggle {
     }
   }, []);
 
-  return { isMenuOpen, handleMenuToggle, forcesCloseMenu };
+  return { isMenuOpen, handleMenuToggle, setIsMenuOpen };
 }

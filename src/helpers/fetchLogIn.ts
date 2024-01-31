@@ -1,12 +1,11 @@
-import { User } from "../types/generalTypes";
 import toast from "react-hot-toast";
 
 export async function fetchLogin(
-  userCredentials: User,
+  userCredentials: any,
   navigateTo: (route: string) => void
 ) {
   try {
-    const LOGIN_URL = "http://127.0.0.1:8000/login/";
+    const LOGIN_URL = "https://api-taskly-l1d9.onrender.com/login/";
     const response = await fetch(LOGIN_URL, {
       method: "POST",
       headers: {

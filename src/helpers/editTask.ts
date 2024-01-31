@@ -47,7 +47,7 @@ export async function editTask(
     dispatch(action);
   } else {
     const response = await fetch(
-      `http://127.0.0.1:8000/update_task/${editedTask.uuid}/`,
+      `https://api-taskly-l1d9.onrender.com/update_task/${editedTask.uuid}/`,
       {
         method: "PUT",
         headers: {

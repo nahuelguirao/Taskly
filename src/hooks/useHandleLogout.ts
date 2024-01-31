@@ -15,7 +15,7 @@ export function useHandleLogout(dispatch: Dispatch<ActionStructure>) {
 
   const handleLogout = async () => {
     try {
-      const LOGOUT_URL = "http://127.0.0.1:8000/logout/";
+      const LOGOUT_URL = "https://api-taskly-l1d9.onrender.com/logout/";
 
       await fetch(LOGOUT_URL, {
         method: "POST",

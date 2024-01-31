@@ -5,7 +5,7 @@ export async function useFetchUsersTasks(
   user: User | undefined,
   dispatch: Dispatch<ActionStructure>
 ) {
-  const BASE_URL = "http://127.0.0.1:8000";
+  const BASE_URL = "https://api-taskly-l1d9.onrender.com";
 
   try {
     if (user !== undefined) {

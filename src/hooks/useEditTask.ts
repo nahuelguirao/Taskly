@@ -2,10 +2,10 @@ import { FormEvent, useContext } from "react";
 import { TaskStateContext } from "../context/TaskStateContext";
 import { UserContext } from "../context/UserContext";
 import { editTask } from "../helpers/editTask";
-import { Task, UUID } from "../types/generalTypes";
+import { Task } from "../types/generalTypes";
 import { UtilitiesContext } from "../context/UtilitiesContext";
 
-export function useEditTask(uuid: UUID) {
+export function useEditTask(uuid: any) {
   //Tasks state
   const { taskState, dispatch } = useContext(TaskStateContext);
 

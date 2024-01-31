@@ -1,10 +1,10 @@
 import toast from "react-hot-toast";
 import { format } from "date-fns";
 import { ActionStructure, Task, User } from "../types/generalTypes";
-import { Dispatch, FormEvent } from "react";
+import { Dispatch } from "react";
 
 export const addTask = async (
-  e: FormEvent<HTMLFormElement>,
+  e: any,
   dispatch: Dispatch<ActionStructure>,
   navigateTo: (route: string) => void,
   user: User | undefined
@@ -46,19 +46,22 @@ export const addTask = async (
     toast.success("Task added!");
   } else {
     try {
-      const response = await fetch("http://127.0.0.1:8000/tasks/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          uuid: newTask.uuid,
-          title: newTask.title,
-          description: newTask.description,
-          date: newTask.date,
-          user: user.id,
-        }),
-      });
+      const response = await fetch(
+        "https://api-taskly-l1d9.onrender.com/tasks/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uuid: newTask.uuid,
+            title: newTask.title,
+            description: newTask.description,
+            date: newTask.date,
+            user: user.id,
+          }),
+        }
+      );
 
       if (!response.ok) {
         console.error("Failed to add task:", response.statusText);

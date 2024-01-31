@@ -23,15 +23,21 @@ export function NavbarMobile({ handleMenuToggle }: NavbarMobileProps) {
           Add Task
         </Link>
         {user !== undefined ? (
-          <a className="navLink" onClick={handleLogout}>
+          <a
+            className="navLink"
+            onClick={() => {
+              handleLogout();
+              handleMenuToggle();
+            }}
+          >
             Logout
           </a>
         ) : (
           <>
-            <Link className="navLink" to={"/login"}>
+            <Link className="navLink" to={"/login"} onClick={handleMenuToggle}>
               Login
             </Link>
-            <Link className="navLink" to={"/singin"}>
+            <Link className="navLink" to={"/singin"} onClick={handleMenuToggle}>
               Sign in
             </Link>
           </>

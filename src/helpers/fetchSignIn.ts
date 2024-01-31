@@ -1,10 +1,8 @@
-import { User } from "../types/generalTypes";
-
 export async function fetchSignIn(
-  newUser: User,
+  newUser: any,
   navigateTo: (route: string) => void
 ) {
-  const URL_SIGNIN = "http://127.0.0.1:8000/signin/";
+  const URL_SIGNIN = "https://api-taskly-l1d9.onrender.com/signin/";
 
   try {
     const response = await fetch(URL_SIGNIN, {
