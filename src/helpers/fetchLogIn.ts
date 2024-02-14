@@ -6,6 +6,9 @@ export async function fetchLogin(
 ) {
   try {
     const LOGIN_URL = "https://api-taskly-l1d9.onrender.com/login/";
+
+    const waitingToast = toast.loading("Logging in...");
+
     const response = await fetch(LOGIN_URL, {
       method: "POST",
       headers: {
@@ -13,6 +16,8 @@ export async function fetchLogin(
       },
       body: JSON.stringify(userCredentials),
     });
+
+    toast.dismiss(waitingToast);
 
     if (!response.ok) {
       toast.error("Invalid credentials.", { position: "bottom-center" });
